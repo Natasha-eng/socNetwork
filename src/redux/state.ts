@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = (state: RootStateType) => {
+    console.log("state changed");
+}
 
 export type PostType = {
     id: number
@@ -43,7 +45,7 @@ let state: RootStateType = {
             {id: 3, message: "BalBla", likesCount: 14},
             {id: 4, message: "DaDa", likesCount: 14}
         ],
-        newPostText:"it=kamasutra.com"
+        newPostText: "it=kamasutra.com"
     },
     DialogsPage: {
         messages: [
@@ -65,7 +67,7 @@ let state: RootStateType = {
     Sidebar: {}
 }
 
-export let addPost = () => {
+export const addPost = () => {
     const newPost: PostType = {
         id: 5,
         message: state.ProfilePage.newPostText,
@@ -76,9 +78,13 @@ export let addPost = () => {
     rerenderEntireTree(state);
 }
 
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state.ProfilePage.newPostText = newText
     rerenderEntireTree(state);
+}
+
+export const subscribe = (observer: (state: RootStateType) => void) => {
+    rerenderEntireTree = observer;
 }
 
 

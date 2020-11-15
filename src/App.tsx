@@ -11,30 +11,29 @@ import Settings from './components/Settings/Settings';
 import {RootStateType} from "./redux/state";
 
 
-
-
 type PropsType = {
     appState: RootStateType
     addPost: () => void
-    updateNewPostText: (newText: string)=> void
+    updateNewPostText: (newText: string) => void
 }
 
 function App(props: PropsType) {
 
     return (
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className="app-wrapper-content">
-                    <Route path='/dialogs' render={() => <Dialogs
-                        state={props.appState.DialogsPage}/>}/>
-                    <Route path='/profile' render={() => <Profile profilePage={props.appState.ProfilePage} addPost = {props.addPost}
-                                                                  updateNewPostText = {props.updateNewPostText}/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                </div>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className="app-wrapper-content">
+                <Route path='/dialogs' render={() => <Dialogs
+                    state={props.appState.DialogsPage}/>}/>
+                <Route path='/profile'
+                       render={() => <Profile profilePage={props.appState.ProfilePage} addPost={props.addPost}
+                                              updateNewPostText={props.updateNewPostText}/>}/>
+                <Route path='/news' render={() => <News/>}/>
+                <Route path="/music" render={() => <Music/>}/>
+                <Route path="/settings" render={() => <Settings/>}/>
             </div>
+        </div>
     );
 }
 
