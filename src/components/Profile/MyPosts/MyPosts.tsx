@@ -1,7 +1,7 @@
 import React, {RefObject} from "react";
 import Post from "./Post/Post";
 import classes from "./MyPosts.module.css";
-import {ActionsTypes, addPostActionCreator, PostType, updateNewPostTextActionCreator} from "../../../redux/state";
+import {ActionsTypes, addPostAC, PostType, updateNewPostTextAC} from "../../../redux/state";
 
 
 
@@ -18,13 +18,13 @@ import {ActionsTypes, addPostActionCreator, PostType, updateNewPostTextActionCre
             let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
 
             let addPost = () => {
-                props.dispatch(addPostActionCreator());
+                props.dispatch(addPostAC());
             }
 
             let onPostChange = () => {
                 if (newPostElement.current) {
                     let text = newPostElement.current.value;
-                    let action = updateNewPostTextActionCreator(text);
+                    let action = updateNewPostTextAC(text);
                     props.dispatch(action)
                 }
             }

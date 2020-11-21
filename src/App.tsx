@@ -26,7 +26,7 @@ function App(props: PropsType) {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Route path='/dialogs' render={() => <Dialogs
-                    store={state.DialogsPage}/>}/>
+                    store={props.store} dispatch = {props.dispatch}/>}/>
                 <Route path='/profile'
                        render={() => <Profile profilePage={state.ProfilePage} dispatch={props.dispatch}/>}/>
                 <Route path='/news' render={() => <News/>}/>

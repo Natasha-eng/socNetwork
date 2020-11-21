@@ -22,6 +22,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
+    newMessageBody: string
 }
 
 export type RootStateType = {
@@ -32,7 +33,10 @@ export type RootStateType = {
 
 export type SidebarType = {}
 
-export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+export type ActionsTypes = ReturnType<typeof addPostAC> |
+    ReturnType<typeof updateNewPostTextAC> |
+    ReturnType<typeof updateNewMessageBodyAC> |
+    ReturnType<typeof sendMessageAC>
 
 export type StoreType = {
     _state: RootStateType
@@ -44,6 +48,8 @@ export type StoreType = {
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW-MESSAGE+BODY';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
 let store: StoreType = {
     _state: {
@@ -71,7 +77,8 @@ let store: StoreType = {
                 {id: 4, name: "Sasha"},
                 {id: 5, name: "Victor"},
                 {id: 6, name: "Valera"}
-            ]
+            ],
+            newMessageBody: ""
         },
         Sidebar: {}
     },
@@ -99,14 +106,23 @@ let store: StoreType = {
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.ProfilePage.newPostText = action.newText
             this._onChange();
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.DialogsPage.newMessageBody = action.body
+            this._onChange();
+        } else if (action.type === SEND_MESSAGE){
+            let body = this._state.DialogsPage.newMessageBody;
+            this._state.DialogsPage.newMessageBody = "";
+            this._state.DialogsPage.messages.push({id: 6, message: body});
+            this._onChange();
         }
+
     }
 }
 
-export const addPostActionCreator = () =>( {type:ADD_POST}) as const
-
-
-export const  updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text}) as const
+export const addPostAC = () =>( {type:ADD_POST}) as const
+export const  updateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text}) as const
+export const updateNewMessageBodyAC = (text: string) => ({type:UPDATE_NEW_MESSAGE_BODY, body: text}) as const
+export const sendMessageAC = () => ({type:SEND_MESSAGE}) as const
 
 
 export default store;

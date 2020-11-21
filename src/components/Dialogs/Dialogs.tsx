@@ -1,22 +1,32 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType} from "../../redux/state";
-
+import {ActionsTypes, sendMessageAC, StoreType, updateNewMessageBodyAC} from "../../redux/state";
 
 
 type PropsType = {
-    store: DialogsPageType
+    store: StoreType
+    dispatch: (action: ActionsTypes ) => void
 }
 
-function Dialogs(props:PropsType) {
+function Dialogs(props: PropsType) {
 
+    let state = props.store.getState().DialogsPage;
 
-    let dialogsElements = props.store.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+    let dialogsElements =state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+    let messagesElements = state.messages.map(m => <Message message={m.message}/>);
+    let newMessageBody = state.newMessageBody;
 
+    let onSendMessageClick = () => {
+        props.dispatch(sendMessageAC());
+    }
 
-    let messagesElements = props.store.messages.map(m => <Message message={m.message}/>)
+    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = e.target.value;
+        props.dispatch(updateNewMessageBodyAC(body));
+    }
+
 
     return (
         <div className={classes.dialogs}>
@@ -24,10 +34,17 @@ function Dialogs(props:PropsType) {
                 {dialogsElements}
             </div>
             <div className={classes.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
+                <div>
+                    <div><textarea value={newMessageBody} onChange={onNewMessageChange}
+                                   placeholder="Enter your message"></textarea></div>
+                    <div>
+                        <button onClick={onSendMessageClick}>Add Message</button>
+                    </div>
+                </div>
             </div>
 
-            <textarea></textarea><button>Add Message</button>
+
         </div>
     )
 }
