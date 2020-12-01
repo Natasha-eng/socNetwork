@@ -1,14 +1,16 @@
 import React, {RefObject} from "react";
 import Post from "./Post/Post";
 import classes from "./MyPosts.module.css";
-import {ActionsTypes, addPostAC, PostType, updateNewPostTextAC} from "../../../redux/state";
+import {ActionsTypes, PostType} from "../../../redux/store";
 
 
 
         type PostsType = {
             posts: Array<PostType>
             newPostText: string
-            dispatch: (action: ActionsTypes) => void
+            updateNewPostText: (text: string) =>void
+            addPost: ()=> void
+
         }
 
         function MyPosts(props: PostsType) {
@@ -17,15 +19,14 @@ import {ActionsTypes, addPostAC, PostType, updateNewPostTextAC} from "../../../r
 
             let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
 
-            let addPost = () => {
-                props.dispatch(addPostAC());
+            let onAddPost = () => {
+               props.addPost()
             }
 
             let onPostChange = () => {
                 if (newPostElement.current) {
                     let text = newPostElement.current.value;
-                    let action = updateNewPostTextAC(text);
-                    props.dispatch(action)
+                    props.updateNewPostText(text);
                 }
             }
 
@@ -37,7 +38,7 @@ import {ActionsTypes, addPostAC, PostType, updateNewPostTextAC} from "../../../r
                             <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}/>
                         </div>
                         <div>
-                            <button onClick={addPost}>Add post</button>
+                            <button onClick={onAddPost}>Add post</button>
                         </div>
                     </div>
                     <div className={classes.posts}>
