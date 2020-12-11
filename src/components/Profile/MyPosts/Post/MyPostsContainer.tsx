@@ -1,38 +1,39 @@
 import React from "react";
 import MyPosts from "../MyPosts";
 import {addPostAC, updateNewPostTextAC} from "../../../../redux/profile-reducer";
-import StoreContext from "../../../../StoreContext";
-import { Store } from "redux";
+import {connect} from "react-redux";
+import {PostType} from "../../../../redux/store";
+import {RootStateRedux} from "../../../../redux/redux-store";
 
-
-type PostsType = {
-    // store: StoreReduxType
+type mapStatePropsType = {
+    posts: Array<PostType>
+    newPostText: string
 }
 
-function MyPostsContainer(props: PostsType) {
+type mapDispatchPropsType = {
+    updateNewPostText: (text: string) => void
+    addPost: () => void
+}
 
-    return (
-        <StoreContext.Consumer>
-            {(store:Store) => {
+let mapStateToProps = (state: RootStateRedux): mapStatePropsType => {
+    return {
+        posts: state.ProfilePage.posts,
+        newPostText: state.ProfilePage.newPostText
+    }
+}
 
-                let state = store.getState();
-
-                let addPost = () => {
-                   store.dispatch(addPostAC());
-                }
-
-                let onPostChange = (text: string) => {
-                    let action = updateNewPostTextAC(text);
-                    store.dispatch(action)
-                }
-                return <MyPosts updateNewPostText={onPostChange}
-                         addPost={addPost}
-                         posts={store.getState().ProfilePage.posts}
-                         newPostText={store.getState().ProfilePage.newPostText}/>
-            }
+let mapDispatchToProps = (dispatch: any): mapDispatchPropsType => {
+    return {
+        updateNewPostText: (text) => {
+            let action = updateNewPostTextAC(text);
+            dispatch(action)
+        },
+        addPost: () => {
+            dispatch(addPostAC())
         }
-        </StoreContext.Consumer>
-    )
+    }
 }
+
+const MyPostsContainer = connect<mapStatePropsType, mapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 export default MyPostsContainer;
