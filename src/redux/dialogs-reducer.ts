@@ -1,4 +1,5 @@
-import {ActionsTypes, DialogsPageType} from "./store";
+import { DialogsPageType} from "./store";
+import {ActionsTypes} from "./redux-store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW-MESSAGE+BODY';
 const SEND_MESSAGE = 'SEND_MESSAGE';

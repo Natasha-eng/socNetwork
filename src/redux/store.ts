@@ -2,6 +2,7 @@ import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer"
 import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {followAC, setUsersAC, unfollowAC, UserType} from "./users-reducer";
+import {ActionsTypes} from "./redux-store";
 
 export type PostType = {
     id: number
@@ -42,13 +43,7 @@ export type RootStateType = {
 
 export type SidebarType = {}
 
-export type ActionsTypes = ReturnType<typeof addPostAC> |
-    ReturnType<typeof updateNewPostTextAC> |
-    ReturnType<typeof updateNewMessageBodyAC> |
-    ReturnType<typeof sendMessageAC> |
-    ReturnType<typeof followAC> |
-    ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUsersAC>
+
 
 export type StoreType = {
     _state: RootStateType
