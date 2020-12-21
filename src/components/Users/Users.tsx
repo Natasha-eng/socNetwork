@@ -20,8 +20,7 @@ type UsersResponseType = {
 
 export class Users extends React.Component<UsersPropsType> {
 
-    constructor(props: UsersPropsType) {
-        super(props);
+    componentDidMount() {
         axios.get<UsersResponseType>("https://social-network.samuraijs.com/api/1.0/users")
             .then(response => {
                 this.props.setUsers(response.data.items)
@@ -29,6 +28,21 @@ export class Users extends React.Component<UsersPropsType> {
     }
 
     render() {
+
+        let pageCount = this.props.totalUsersCount / this.props.pageSize;
+
+        let pages = [];
+        for (let i = 1; i <= pageCount; i++) {
+            pages.push(i);
+        }
+
+        <div>
+            <span>1</span>
+            <span>2</span>
+            <span className={styles.selectedPage}>3</span>
+            <span>4</span>
+            <span>5</span>
+        </div>
         return <div>
             {this.props.users.map(u => <div key={u.id}>
             <span>

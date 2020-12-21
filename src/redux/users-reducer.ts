@@ -15,11 +15,19 @@ export type UserType = {
     status: string
 }
 
-let initialState = {
-    users: []
+export type InitialUsersPageType = {
+    users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
 }
 
-const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
+let initialState = {
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0
+}
+
+const usersReducer = (state: InitialUsersPageType = initialState, action: ActionsTypes): InitialUsersPageType => {
     switch (action.type) {
         case FOLLOW:
             return {

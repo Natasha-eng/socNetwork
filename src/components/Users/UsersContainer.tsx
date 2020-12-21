@@ -1,12 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import {RootStateRedux} from "../../redux/redux-store";
-import {Dispatch } from 'redux'
+import {Dispatch} from 'redux'
 import {followAC, setUsersAC, unfollowAC, UserType} from "../../redux/users-reducer";
 import {Users} from "./Users";
 
 type mapStatePropsType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
 }
 
 type mapDispatchPropsType = {
@@ -19,7 +21,9 @@ export type UsersPropsType = mapStatePropsType & mapDispatchPropsType
 
 let mapStateToProps = (state: RootStateRedux): mapStatePropsType => {
     return {
-        users: state.UsersPage.users
+        users: state.UsersPage.users,
+        pageSize: state.UsersPage.pageSize,
+        totalUsersCount: state.UsersPage.totalUsersCount
     }
 }
 
