@@ -1,18 +1,19 @@
 import React from "react";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
+import {ProfilePropsType, UserProfileResponseType} from "./ProfileContainer";
 
+type ProfileType = {
+    profile: UserProfileResponseType | null
 
-
-type PropsType = {
-    // store: StoreReduxType
 }
 
-function Profile(props: PropsType) {
+
+function Profile(props: ProfileType) {
     return (
         <div>
-            <ProfileInfo/>
-            <MyPostsContainer />
+            <ProfileInfo profile={props.profile}/>
+            <MyPostsContainer/>
         </div>
     )
 }
