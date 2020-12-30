@@ -6,7 +6,7 @@ import usersReducer, {
     follow,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount, toggleIsFetching,
+    setUsersTotalCount, toggleFollowingProgress, toggleIsFetching,
     unfollow
 } from "./users-reducer";
 import authReducer, {setAuthUserData} from "./auth-reducer";
@@ -22,7 +22,8 @@ export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof setUsersTotalCount> |
     ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof setUserProfile>|
-    ReturnType<typeof setAuthUserData>
+    ReturnType<typeof setAuthUserData>|
+    ReturnType<typeof toggleFollowingProgress>
 
 
 let reducers = combineReducers({
