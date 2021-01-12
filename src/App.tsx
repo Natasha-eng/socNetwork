@@ -27,7 +27,7 @@ function App(props: PropsType) {
             <HeaderContainer/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer />}/>
 
                 <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
 
