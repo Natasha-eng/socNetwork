@@ -6,8 +6,9 @@ import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: UserProfileResponseType | null
+    status: string
+    updateStatus: (status: string) => void
 }
-
 
 export function ProfileInfo(props: ProfileInfoPropsType) {
     if (!props.profile) {
@@ -15,12 +16,12 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
     }
     return (
         <div>
-           {/* <div>
+            {/* <div>
                 <img alt="#" src="https://images.app.goo.gl/6yFxj7XkVWRLSSwz7"/>
             </div>*/}
             <div className={classes.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-               <ProfileStatus  status = {'Hello'}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )

@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {RootStateRedux} from "../../redux/redux-store";
-import {getUserProfile} from "../../redux/profile-reducer";
+import {getUserStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -31,11 +31,13 @@ export type UserProfileResponseType = {
 
 type mapStatePropsType = {
     profile: UserProfileResponseType | null
-
+    status: string
 }
 
 type mapDispatchPropsType = {
     getUserProfile: (userId: number) => void
+    getUserStatus: (userId: number) => void
+    updateStatus: (status: string) => void
 }
 
 type PathParamsType = {
@@ -51,22 +53,24 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = +this.props.match.params.userId;
         if (!userId) {
-            userId = 2;
+            userId =  13115 ;
             // this.props.history.push("/login");
         }
         this.props.getUserProfile(userId);
+        this.props.getUserStatus(userId);
     }
 
     render() {
 
         return (
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
         )
     }
 }
 
 let mapStateToProps = (state: RootStateRedux): mapStatePropsType => ({
     profile: state.ProfilePage.profile,
+    status: state.ProfilePage.status
 })
 
 /*let AuthRedirectComponent = withAuthRedirect(ProfileContainer);*/
@@ -78,7 +82,7 @@ let mapStateToProps = (state: RootStateRedux): mapStatePropsType => ({
 /*withRouter(connect<mapStatePropsType, mapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, {getUserProfile})(AuthRedirectComponent));*/
 
 export default compose<React.ComponentType>(
-    connect<mapStatePropsType, mapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, {getUserProfile}),
+    connect<mapStatePropsType, mapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, {getUserProfile, getUserStatus, updateStatus}),
     withRouter,
     withAuthRedirect)(ProfileContainer)
 

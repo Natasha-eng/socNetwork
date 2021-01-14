@@ -25,6 +25,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: null | UserProfileResponseType
+    status: string
 }
 
 export type DialogsPageType = {
@@ -65,7 +66,8 @@ let store: StoreType = {
                 {id: 4, message: "DaDa", likesCount: 14}
             ],
             newPostText: "it=kamasutra.com",
-            profile: null
+            profile: null,
+            status: ''
         },
         DialogsPage: {
             messages: [
@@ -106,5 +108,4 @@ let store: StoreType = {
     }
 }
 
-export default store;
 

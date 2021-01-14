@@ -20,6 +20,12 @@ type PostFollowResponseType = {
     data: {}
 }
 
+type UpdateStatusResponseType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {}
+}
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -53,7 +59,22 @@ export const usersAPI = {
     },
 
     getProfile(userId: number) {
+        console.warn('Obsolete method. Please use profileApy object')
+        return profileAPI.getProfile((userId));
+    }
+
+}
+
+export const profileAPI = {
+
+    getProfile(userId: number) {
         return instance.get<UserProfileResponseType>(`profile/` + userId);
+    },
+    getStatus(userId: number){
+        return instance.get<string>(`profile/status/` + userId);
+    },
+    updateStatus(status: string) {
+        return instance.put<UpdateStatusResponseType>(`profile/status/`, { status: status });
     }
 
 }
