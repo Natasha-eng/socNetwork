@@ -1,6 +1,4 @@
 import React, {ChangeEvent} from "react";
-import classes from './ProfileInfo.module.css';
-import {ReactComponent} from "*.svg";
 
 type ProfileStatusType = {
     status: string
@@ -25,14 +23,21 @@ export class ProfileStatus extends React.Component <ProfileStatusType> {
         this.setState({
             editMode: false
         })
-
         this.props.updateStatus(this.state.status)
     }
 
     onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            state: e.currentTarget.value
+            status: e.currentTarget.value
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {

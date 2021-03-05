@@ -1,6 +1,7 @@
 import axios from "axios";
 import {UserType} from "../redux/users-reducer";
-import {UserProfileResponseType} from "../components/Profile/ProfileContainer";
+import {UserProfileResponseType} from "../redux/profile-reducer";
+
 
 export type UsersResponseType = {
     items: Array<UserType>
@@ -30,7 +31,7 @@ const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': '87b50b1b-6ff4-45ca-968d-60932a0881df'
+        'API-KEY': '211feec0-1855-4be6-873e-e36e9bb0fc77'
     }
 })
 
@@ -42,6 +43,20 @@ type AuthResponseType = {
         email: string,
         login: string
     }
+}
+
+type LoginResponseType = {
+    resultCode: number
+    messages: String[],
+    data: {
+        userId: number
+    }
+}
+
+type LogoutResponseType = {
+    resultCode: number
+    messages: String[],
+    data: {}
 }
 
 export const usersAPI = {
@@ -59,8 +74,9 @@ export const usersAPI = {
     },
 
     getProfile(userId: number) {
+
         console.warn('Obsolete method. Please use profileApy object')
-        return profileAPI.getProfile((userId));
+        return profileAPI.getProfile(userId);
     }
 
 }
@@ -68,13 +84,14 @@ export const usersAPI = {
 export const profileAPI = {
 
     getProfile(userId: number) {
+
         return instance.get<UserProfileResponseType>(`profile/` + userId);
     },
-    getStatus(userId: number){
+    getStatus(userId: number) {
         return instance.get<string>(`profile/status/` + userId);
     },
     updateStatus(status: string) {
-        return instance.put<UpdateStatusResponseType>(`profile/status/`, { status: status });
+        return instance.put<UpdateStatusResponseType>(`profile/status`, {status});
     }
 
 }
@@ -83,6 +100,14 @@ export const authAPI = {
 
     me() {
         return instance.get<AuthResponseType>(`auth/me`)
+    },
+
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post<LoginResponseType>(`auth/login`, {email, password, rememberMe});
+    },
+
+    logout() {
+        return instance.delete<LogoutResponseType>(`auth/login`);
     }
 }
 

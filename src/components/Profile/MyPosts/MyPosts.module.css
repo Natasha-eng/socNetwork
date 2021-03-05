@@ -1,6 +1,48 @@
 .postsBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
 }
+
+.postsBlock .form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.postsBlock .form textarea{
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #e7e8ee;
+}
+
+.postsBlock .form .buttonForm{
+    display: inline-block;
+    outline: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border: 2px solid #262626;
+    color: #262626;
+    font-weight: 500;
+    align-self: flex-end;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.postsBlock .form .buttonForm:hover{
+    background: #262626;
+    color: #007bff;
+}
+
 .posts {
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 }

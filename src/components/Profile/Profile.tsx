@@ -1,7 +1,8 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
-import {UserProfileResponseType} from "./ProfileContainer";
+import {UserProfileResponseType} from "../../redux/profile-reducer";
+import profileStyles from "./Profile.module.css";
 
 type ProfileType = {
     profile: UserProfileResponseType | null
@@ -12,8 +13,8 @@ type ProfileType = {
 
 function Profile(props: ProfileType) {
     return (
-        <div>
-            <ProfileInfo profile={props.profile} status = {props.status} updateStatus = {props.updateStatus}/>
+        <div className={profileStyles.profileContainer}>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer/>
         </div>
     )

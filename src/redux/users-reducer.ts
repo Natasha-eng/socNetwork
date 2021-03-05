@@ -1,8 +1,6 @@
 import {ActionsTypes, RootStateRedux} from "./redux-store";
 import {usersAPI} from "../api/api";
-import {Dispatch} from "redux";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
-
+import {ThunkAction} from "redux-thunk";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -40,6 +38,7 @@ let initialState = {
     isFetching: false,
     followingInProgress: []
 }
+
 export type ThunkActionType = ThunkAction<void, RootStateRedux, unknown, ActionsTypes>;
 
 const usersReducer = (state: InitialUsersPageType = initialState, action: ActionsTypes): InitialUsersPageType => {
@@ -118,12 +117,13 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 
 // export type ThunkDispatchType = ThunkDispatchType<RootStateRedux, unknown, ActionsTypes>;
 
-export const getUsers = (currentPage: number, pageSize: number): ThunkActionType => {
+export const requestUsers = (page: number, pageSize: number): ThunkActionType => {
     return (dispatch) => {
 
         dispatch(toggleIsFetching(true));
+        dispatch(setCurrentPage(page));
 
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        usersAPI.getUsers(page, pageSize).then(data => {
 
             dispatch(setUsers(data.items));
             dispatch(setUsersTotalCount(data.totalCount));

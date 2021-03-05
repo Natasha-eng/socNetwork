@@ -1,8 +1,9 @@
 import React from "react";
-import loading from "../../../assets/images/loading.svg";
+import loader from "../../../assets/images/load.gif";
+import preloaderStyle from "./loader.module.css";
 
 export function Preloader() {
-    return <div>
-        <img src={loading}/>
+    return <div className={preloaderStyle.loader}>
+        <img src={loader}/>
     </div>
 }

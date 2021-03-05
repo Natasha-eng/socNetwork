@@ -1,19 +1,32 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e4ebf3;
+    min-height: 100vh;
+    font-size: 16px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .app-wrapper {
     display: grid;
-    width: 1200px;
-    margin: 0 auto;
+    width: 95%;
     grid-template-areas:
-    'h h'
-    'n c';
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
-    /*grid-gap: 10px;*/
+    'c';
+    grid-template-columns: 3fr;
+    gap: 12px;
+    background: #e4ebf3;
+    padding: 0 20px;
 }
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: lightblue;
-
+    border-radius: 10px;
+    background: #e4ebf3;
+    min-height: 100vh;
 }
 
 

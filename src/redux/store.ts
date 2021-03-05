@@ -1,8 +1,7 @@
-import profileReducer from "./profile-reducer";
+import profileReducer, {UserProfileResponseType} from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import { UserType} from "./users-reducer";
 import {ActionsTypes} from "./redux-store";
-import {UserProfileResponseType} from "../components/Profile/ProfileContainer";
 import dialogsReducer from "./dialogs-reducer";
 
 export type PostType = {
@@ -23,7 +22,6 @@ export type MessageType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: null | UserProfileResponseType
     status: string
 }
@@ -31,7 +29,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
-    newMessageBody: string
+
 }
 
 export type UsersPageType = {
@@ -65,7 +63,6 @@ let store: StoreType = {
                 {id: 3, message: "BalBla", likesCount: 14},
                 {id: 4, message: "DaDa", likesCount: 14}
             ],
-            newPostText: "it=kamasutra.com",
             profile: null,
             status: ''
         },
@@ -84,8 +81,7 @@ let store: StoreType = {
                 {id: 4, name: "Sasha"},
                 {id: 5, name: "Victor"},
                 {id: 6, name: "Valera"}
-            ],
-            newMessageBody: ""
+            ]
         },
         Sidebar: {}
     },

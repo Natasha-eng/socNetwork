@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
-import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import dialogsReducer, {sendMessageAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import profileReducer, {addPostAC, setStatus, setUserProfile, updateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {addPostAC, setStatus, setUserProfile} from "./profile-reducer";
 import usersReducer, {
     followSuccess,
     setCurrentPage,
@@ -13,11 +13,10 @@ import usersReducer, {
 } from "./users-reducer";
 import authReducer, {setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
+import {reducer as formReducer} from 'redux-form'
+import appReducer, {initializedSuccess} from "./app-reducer";
 
 export type ActionsTypes = ReturnType<typeof addPostAC> |
-    ReturnType<typeof updateNewPostTextAC>
-|
-    ReturnType<typeof updateNewMessageBodyAC> |
     ReturnType<typeof sendMessageAC> |
     ReturnType<typeof followSuccess> |
     ReturnType<typeof unfollowSuccess> |
@@ -25,10 +24,11 @@ export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setUsersTotalCount> |
     ReturnType<typeof toggleIsFetching> |
-    ReturnType<typeof setUserProfile>|
-    ReturnType<typeof setAuthUserData>|
-    ReturnType<typeof toggleFollowingProgress>|
-    ReturnType<typeof setStatus>
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof setAuthUserData> |
+    ReturnType<typeof toggleFollowingProgress> |
+    ReturnType<typeof setStatus>|
+    ReturnType<typeof initializedSuccess>
 
 
 const reducers = combineReducers({
@@ -36,9 +36,10 @@ const reducers = combineReducers({
     ProfilePage: profileReducer,
     UsersPage: usersReducer,
     Sidebar: sidebarReducer,
-    Auth: authReducer
+    Auth: authReducer,
+    form: formReducer,
+    App: appReducer
 });
-
 
 
 export type RootStateRedux = ReturnType<typeof reducers>

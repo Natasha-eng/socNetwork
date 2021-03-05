@@ -1,3 +1,84 @@
 .descriptionBlock {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.descriptionBlock .profileItemLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 49%;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.descriptionBlock .profileItemRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 49%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #fff;
     padding: 10px;
+    color: #888da8;
+    font-size: 14px;
+    font-weight: 500;
+
+}
+
+.profileImg {
+    text-align: center;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.statusMark{
+    padding-left: 10px;
+    color: #888da8;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.profileImg img {
+    background-color: #166ba7;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.jobDescription {
+    padding: 10px;
+    min-height: 30%;
+    border: 1px solid #e7e8ee;
+    border-radius: 10px;
+}
+
+.profileInfoItem{
+    margin-bottom: 15px;
+
+}
+
+.descriptionBlock .fullName {
+    padding: 10px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-align: center;
+    border: 1px solid #e7e8ee;
+    color: #333;
+}
+
+.contacts {
+    min-height: 30%;
+    border: 1px solid #e7e8ee;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.aboutMeInfo {
+    min-height: 30%;
+    border: 1px solid #e7e8ee;
+    padding: 10px;
+    border-radius: 10px;
 }

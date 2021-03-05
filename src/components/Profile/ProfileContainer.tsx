@@ -2,36 +2,16 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {RootStateRedux} from "../../redux/redux-store";
-import {getUserStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {getUserStatus, getUserProfile, updateStatus, UserProfileResponseType} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-
-export type UserProfileResponseType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
-    photos: {
-        small: string
-        large: string
-    }
-}
-
 type mapStatePropsType = {
     profile: UserProfileResponseType | null
     status: string
+    authorizedUserId: number | null
+    isAuth: boolean
 }
 
 type mapDispatchPropsType = {
@@ -51,26 +31,31 @@ export type ProfilePropsType = mapStatePropsType & mapDispatchPropsType;
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        let userId = +this.props.match.params.userId;
-        if (!userId) {
-            userId =  13115 ;
-            // this.props.history.push("/login");
+        let userId: number | string = this.props.match.params.userId;
+
+        if (!userId && this.props.authorizedUserId) {
+            userId = +this.props.authorizedUserId;
+            if (!userId) {
+                this.props.history.push("/login");
+            }
         }
-        this.props.getUserProfile(userId);
-        this.props.getUserStatus(userId);
+        this.props.getUserProfile(+userId);
+        this.props.getUserStatus(+userId);
     }
 
     render() {
-
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         )
     }
 }
 
 let mapStateToProps = (state: RootStateRedux): mapStatePropsType => ({
     profile: state.ProfilePage.profile,
-    status: state.ProfilePage.status
+    status: state.ProfilePage.status,
+    authorizedUserId: state.Auth.userId,
+    isAuth: state.Auth.isAuth
 })
 
 /*let AuthRedirectComponent = withAuthRedirect(ProfileContainer);*/
@@ -82,7 +67,11 @@ let mapStateToProps = (state: RootStateRedux): mapStatePropsType => ({
 /*withRouter(connect<mapStatePropsType, mapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, {getUserProfile})(AuthRedirectComponent));*/
 
 export default compose<React.ComponentType>(
-    connect<mapStatePropsType, mapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, {getUserProfile, getUserStatus, updateStatus}),
+    connect<mapStatePropsType, mapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, {
+        getUserProfile,
+        getUserStatus,
+        updateStatus
+    }),
     withRouter,
     withAuthRedirect)(ProfileContainer)
 

@@ -1,10 +1,15 @@
 .dialogs {
+    padding-top: 10px;
+    padding-bottom:10px ;
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 3fr 10fr;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.08);
 }
 
 .dialogsItems {
-    padding: 10px;
+    overflow-y: auto;
 }
 
 .dialogsItems .active {
@@ -12,14 +17,37 @@
 }
 
 .dialog {
+    padding: 20px;
+    border: 1px solid #e7e8ee;
+}
 
+.dialog a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.dialog:hover {
+    border-bottom: 1px solid #166ba7;
+    background-color: #e0e4e8;
 }
 
 .messages {
+    background-color: #f8f9fa;
     padding: 10px;
+    height: 70vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 1px solid #e7e8ee;
 }
 
 .message {
+    background: #e4ebf3;
+    padding: 10px;
 
 }
 

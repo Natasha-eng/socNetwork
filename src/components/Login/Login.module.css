@@ -1,0 +1,89 @@
+.loginContentBox {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.loginContentBox .formBox {
+    width: 50%;
+    padding: 40px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.08);
+}
+
+.loginContentBox .formBox h1 {
+    color: #333;
+    font-weight: 600;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #007bff;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.loginContentBox .formBox .fieldBox {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+    font-weight: 400;
+    border: 1px solid #333;
+    letter-spacing: 1px;
+    color: #333;
+    background: transparent;
+    border-radius: 10px;
+}
+
+.fieldBox span {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #333;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.loginContentBox .formBox button {
+    background: #007bff;
+    width: 100%;
+    padding: 10px 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.loginContentBox .formBox button:hover {
+    background: #065ebc;
+}
+
+.loginContentBox .formBox .rememberMe {
+    display: flex;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.loginContentBox .formBox .rememberMe input[type='checkbox']{
+
+}
+
+.loginContentBox .formBox .rememberMe label {
+    margin-left: 10px;
+    color: #333;
+}
+
+.checkBox {
+    margin-right: 10px;
+}
+
+

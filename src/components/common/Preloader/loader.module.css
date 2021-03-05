@@ -1,0 +1,10 @@
+.loader {
+    background-color: #e4ebf3;;
+    display: flex;
+    justify-content: center;
+}
+
+.loader img {
+    width: 100px;
+    height: 100px;
+}

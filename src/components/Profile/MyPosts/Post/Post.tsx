@@ -1,5 +1,7 @@
 import React from "react";
-import classes from './Post.module.css';
+import postStyle from './Post.module.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faThumbsUp} from "@fortawesome/free-regular-svg-icons/faThumbsUp";
 
 
 type PostsType = {
@@ -9,13 +11,14 @@ type PostsType = {
 
 function Post(props: PostsType) {
     return (
-        <div className={classes.item}>
-            <img src='https://images.app.goo.gl/5ZCf4bKyMsx3XMHf7'/>
-            {props.message}
-            <div>
-                <span>like</span> {props.likesCount}
+        <>
+            <img src='https://images.app.goo.gl/5ZCf4bKyMsx3XMHf7' alt = 'userImg'/>
+            <div className={postStyle.postMessage}>{props.message}</div>
+            <div className={postStyle.likeItem}>
+                <span><FontAwesomeIcon icon={faThumbsUp} className={postStyle.fa}/> {props.likesCount}</span>
             </div>
-        </div>
+
+        </>
     )
 }
 

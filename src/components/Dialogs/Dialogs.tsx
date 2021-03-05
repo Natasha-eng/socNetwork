@@ -1,16 +1,20 @@
-import React, {ChangeEvent} from "react";
-import classes from './Dialogs.module.css';
+import React from "react";
+import dialogStyles from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPageType} from "../../redux/state";
-import { Redirect } from "react-router-dom";
+import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
 
 
 export type PropsType = {
     updateNewMessageBody: (body: string) => void
-    sendMessage: () => void
+    sendMessage: (newMessageBody: string) => void
     dialogsPage: DialogsPageType
     isAuth: boolean
+}
+
+type NewMessageBodyType = {
+    newMessageBody: string
 }
 
 function Dialogs(props: PropsType) {
@@ -18,37 +22,25 @@ function Dialogs(props: PropsType) {
 
     let dialogsElements = state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
     let messagesElements = state.messages.map(m => <Message key={m.id} message={m.message}/>);
-    let newMessageBody = state.newMessageBody;
 
-    let onSendMessageClick = () => {
-        props.sendMessage();
+    function addNewMessage(values: any) {
+        props.sendMessage(values.newMessageBody);
     }
 
-    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
-
-    }
-
-    if(!props.isAuth) return <Redirect to = '/login'/>;
-
+    // if (!props.isAuth) return <Redirect to='/login'/>;
 
     return (
-        <div className={classes.dialogs}>
-            <div className={classes.dialogsItems}>
+        <div className={dialogStyles.dialogs}>
+
+            <div className={dialogStyles.dialogsItems}>
                 {dialogsElements}
             </div>
-            <div className={classes.messages}>
+
+            <div className={dialogStyles.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <div><textarea value={newMessageBody} onChange={onNewMessageChange}
-                                   placeholder="Enter your message"></textarea></div>
-                    <div>
-                        <button onClick={onSendMessageClick}>Add Message</button>
-                    </div>
-                </div>
             </div>
 
+            <AddMessageFormRedux onSubmit={addNewMessage}/>
 
         </div>
     )

@@ -1,0 +1,25 @@
+.statusContainer {
+    max-width: 100%;
+    height: 30px;
+}
+
+.statusContainer input {
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    padding: 10px;
+    background-color: #e7e8ee;
+}
+
+.statusContainer span {
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #e7e8ee;
+    padding: 10px;
+    margin-left: 2px;
+    line-height: 10px;
+}
+
+
