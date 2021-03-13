@@ -19,11 +19,12 @@ type addPostPropsType = {
 
 const maxLength50 = maxLengthCreator(50);
 
-function MyPosts(props: PostsType) {
+const MyPosts = React.memo((props: PostsType) => {
 
-    let postsElement = props.posts.map(p => <div className={postStyles.post}><Post key={p.id} message={p.message}
-                                                                                likesCount={p.likesCount}/></div>);
-
+    let postsElement = props.posts.map(p => <div className={postStyles.post}><Post key={p.id}
+                                                                                   message={p.message}
+                                                                                   likesCount={p.likesCount}/>
+    </div>);
 
     let onAddPost = (values: addPostPropsType) => {
         props.addPost(values.newPostText)
@@ -37,7 +38,7 @@ function MyPosts(props: PostsType) {
             </div>
         </div>
     )
-}
+})
 
 export type AddPostFormValuesType = {
     newPostText: string
