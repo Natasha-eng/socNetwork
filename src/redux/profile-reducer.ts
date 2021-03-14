@@ -94,30 +94,21 @@ export const deletePost = (postId: number) => ({type: DELETE_POST, postId}) as c
 
 
 //Thunks
-export const getUserProfile = (userId: number) => (dispatch: Dispatch<ActionsTypes>) => {
-    usersAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfile(response.data));
-        })
+export const getUserProfile = (userId: number) => async (dispatch: Dispatch<ActionsTypes>) => {
+    let response = await usersAPI.getProfile(userId)
+    dispatch(setUserProfile(response.data));
 }
 
-export const getUserStatus = (userId: number) => (dispatch: Dispatch<ActionsTypes>) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setStatus(response.data));
-        })
+export const getUserStatus = (userId: number) => async (dispatch: Dispatch<ActionsTypes>) => {
+    let response = await profileAPI.getStatus(userId)
+    dispatch(setStatus(response.data));
 }
 
-export const updateStatus = (status: string) => (dispatch: Dispatch<ActionsTypes>) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatus(status));
-            }
-        })
-        .catch(e => {
-            console.log(e)
-        })
+export const updateStatus = (status: string) => async (dispatch: Dispatch<ActionsTypes>) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
+    }
 }
 
 export default profileReducer;
