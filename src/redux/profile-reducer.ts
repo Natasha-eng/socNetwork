@@ -5,8 +5,9 @@ import {Dispatch} from "redux";
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
-type InitialProfileState = {
+export type InitialProfileState = {
     posts: Array<PostType>
     profile: null | UserProfileResponseType
     status: string
@@ -40,7 +41,7 @@ export type PostType = {
     likesCount: number
 }
 
-let initialState = {
+let initialState: InitialProfileState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 23},
         {id: 2, message: "It's my first post", likesCount: 14},
@@ -51,7 +52,7 @@ let initialState = {
     status: ""
 }
 
-const profileReducer = (state: InitialProfileState = initialState, action: ActionsTypes): InitialProfileState => {
+export const profileReducer = (state: InitialProfileState = initialState, action: ActionsTypes): InitialProfileState => {
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {
@@ -76,6 +77,10 @@ const profileReducer = (state: InitialProfileState = initialState, action: Actio
                 ...state,
                 status: action.status
             };
+        case DELETE_POST:
+            return {
+                ...state, posts: state.posts.filter(post => post.id !== action.postId)
+            }
         default:
             return state;
     }
@@ -85,6 +90,7 @@ const profileReducer = (state: InitialProfileState = initialState, action: Actio
 export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText}) as const
 export const setUserProfile = (profile: UserProfileResponseType) => ({type: SET_USER_PROFILE, profile}) as const
 export const setStatus = (status: string) => ({type: SET_STATUS, status}) as const
+export const deletePost = (postId: number) => ({type: DELETE_POST, postId}) as const
 
 
 //Thunks

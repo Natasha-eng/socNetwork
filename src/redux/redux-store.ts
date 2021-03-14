@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import dialogsReducer, {sendMessageAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import profileReducer, {addPostAC, setStatus, setUserProfile} from "./profile-reducer";
+import profileReducer, {addPostAC, deletePost, setStatus, setUserProfile} from "./profile-reducer";
 import usersReducer, {
     followSuccess,
     setCurrentPage,
@@ -15,6 +15,7 @@ import authReducer, {setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
 import appReducer, {initializedSuccess} from "./app-reducer";
+import deleteProperty = Reflect.deleteProperty;
 
 export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof sendMessageAC> |
@@ -28,7 +29,8 @@ export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof setAuthUserData> |
     ReturnType<typeof toggleFollowingProgress> |
     ReturnType<typeof setStatus>|
-    ReturnType<typeof initializedSuccess>
+    ReturnType<typeof initializedSuccess> |
+    ReturnType<typeof deletePost>
 
 
 const reducers = combineReducers({
