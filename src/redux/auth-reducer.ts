@@ -1,10 +1,10 @@
 import {ActionsTypes, RootStateRedux} from "./redux-store";
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {ActionTypes, FormAction, stopSubmit} from "redux-form";
+import {stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA';
 
 export type InitialAuthPageType = {
     userId: number | null,
@@ -48,14 +48,12 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 }) as const
 
 //thunks
-export const getAuthUserData = () => (dispatch: Dispatch<ActionsTypes>) => {
-    return authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data;
-                dispatch(setAuthUserData(id, email, login, true));
-            }
-        })
+export const getAuthUserData = () => async (dispatch: Dispatch<ActionsTypes>) => {
+    let response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
+    }
 }
 
 export type ThunkType = ThunkAction<void, RootStateRedux, unknown, ActionsTypes>;

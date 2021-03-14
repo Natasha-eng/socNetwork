@@ -15,7 +15,6 @@ import authReducer, {setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
 import appReducer, {initializedSuccess} from "./app-reducer";
-import deleteProperty = Reflect.deleteProperty;
 
 export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof sendMessageAC> |
