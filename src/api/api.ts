@@ -9,7 +9,7 @@ export type UsersResponseType = {
     error: string
 }
 
-type DeleteFollowResponseType = {
+export type CommonDeletePostFollowResponseType = {
     resultCode: number
     messages: String[]
     data: {}
@@ -66,15 +66,14 @@ export const usersAPI = {
     },
 
     follow(userId: number) {
-        return instance.post<PostFollowResponseType>(`follow/${userId}`, {},)
+        return instance.post<CommonDeletePostFollowResponseType>(`follow/${userId}`, {},)
     },
 
     unfollow(userId: number) {
-        return instance.delete<DeleteFollowResponseType>(`follow/${userId}`)
+        return instance.delete<CommonDeletePostFollowResponseType>(`follow/${userId}`)
     },
 
     getProfile(userId: number) {
-
         console.warn('Obsolete method. Please use profileApy object')
         return profileAPI.getProfile(userId);
     }
@@ -84,7 +83,6 @@ export const usersAPI = {
 export const profileAPI = {
 
     getProfile(userId: number) {
-
         return instance.get<UserProfileResponseType>(`profile/` + userId);
     },
     getStatus(userId: number) {

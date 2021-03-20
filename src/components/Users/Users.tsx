@@ -1,8 +1,8 @@
 import React from "react";
 import usersStyles from "./users.module.css";
-import userPhoto from "../../assets/images/unknown.jpg";
-import {NavLink} from "react-router-dom";
 import {UserType} from "../../redux/users-reducer";
+import {Paginator} from "../common/Paginator/Paginator";
+import {User} from "./User";
 
 type UsersType = {
     follow: (userId: number) => void
@@ -16,18 +16,22 @@ type UsersType = {
 }
 
 
-export function Users(props: UsersType) {
+export function Users({totalUsersCount, pageSize, currentPage,
+                          onPageChanged, users,  ...props }: UsersType){
 
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    /*
+
+    let pageCount = Math.ceil(totalUsersCount / pageSize)
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
     }
+*/
 
     return (
         <div className={usersStyles.usersContainer}>
 
-           {/* <div>
+            {/* <div>
                 {pages.map(p => {
                     return <span className={props.currentPage === p ? usersStyles.selectedPage : ""}
                                  onClick={() => {
@@ -36,36 +40,12 @@ export function Users(props: UsersType) {
                 })}
             </div>*/}
 
-                <div className={usersStyles.container}>
-                    {props.users.map(u => <div className={usersStyles.card} key={u.id}>
-                        <div className={usersStyles.imgBox}>
-                            <NavLink to={'/profile/' + u.id}>
-                                <img src={u.photos.small !== null ? u.photos.small : userPhoto}
-                                     className={usersStyles.userPhoto}/>
-                            </NavLink>
-                        </div>
-                        <div className={usersStyles.details}>
+            <Paginator totalUsersCount={totalUsersCount} currentPage={currentPage} onPageChanged={onPageChanged}
+                       pageSize={pageSize}/>
 
-                                <h2>{u.name}</h2>
-                                <span>{u.status}</span>
-                                <span>{'u.location.country'}</span>
-                                <span>{'u.location.country'}</span>
-
-                                {u.followed ?
-                                    <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                            onClick={() => {
-                                                props.unfollow(u.id);
-                                            }}>Unfollow</button>
-
-                                    : <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                              onClick={() => {
-                                                  props.follow(u.id);
-                                              }}>Follow</button>}
-
-
-                        </div>
-                    </div>)}
-                </div>
+            <div className={usersStyles.container}>
+                {users.map(u => <User user = {u}  unfollow = {props.unfollow} follow={props.follow} followingInProgress={props.followingInProgress} key={u.id} />)}
+            </div>
 
         </div>)
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../common/FormsControls/FormsControls";
+import {CreateField, Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
@@ -15,28 +15,30 @@ type LoginFormDataType = {
     rememberMe: boolean
 }
 
-export const LoginForm: React.FunctionComponent<InjectedFormProps<LoginFormDataType>> = (props) => {
+export const LoginForm: React.FunctionComponent<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit} >
+        <form onSubmit={handleSubmit}>
             <div className={loginStyles.fieldBox}>
-                <span >Email</span>
-                <Field  placeholder={'email'} name={'email'} validate={[required]} component={Input}/>
+                <span>Email</span>
+               {/* {CreateField("email", "email", [required], Input)}*/}
+                 <Field  placeholder={'email'} name={'email'} validate={[required]} component={Input}/>
             </div>
             <div className={loginStyles.fieldBox}>
-                <span >Password</span>
+                <span>Password</span>
+                {/*{CreateField("Password", "password", [required], Input,{type: 'password'} )}*/}
                 <Field placeholder={'Password'} name={'password'} type={'password'} validate={[required]}
                        component={Input}/>
             </div>
             <div className={loginStyles.rememberMe}>
-                <Field classname = {loginStyles.checkBox} type={'checkbox'} name={'rememberMe'} component={Input}/>
+                <Field classname={loginStyles.checkBox} type={'checkbox'} name={'rememberMe'} component={Input}/>
                 <label>remember me</label>
 
             </div>
             <div className={loginStyles.fieldBox}>
                 <button>Login</button>
             </div>
-            {props.error && <div className={styles.formSummeryError}>
-                {props.error}
+            {error && <div className={styles.formSummeryError}>
+                {error}
             </div>}
         </form>
     )
