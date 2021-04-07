@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from './components/News/News';
 import Music from "./components/Music/Music";
 import Settings from './components/Settings/Settings';
@@ -10,10 +10,10 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from './components/Users/UsersContainer';
 import Login from "./components/Login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
-import {RootStateRedux} from "./redux/redux-store";
+import store, {RootStateRedux} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
 
@@ -32,7 +32,6 @@ class App extends React.Component<PropsType> {
     componentDidMount() {
         this.props.initializeApp();
     }
-
 
     render() {
         if (!this.props.initialized) {
@@ -73,5 +72,15 @@ const mapStateToProps = (state: RootStateRedux) => ({
     initialized: state.App.initialized
 })
 
-export default compose<React.ComponentType>(withRouter,
+let AppContainer =  compose<React.ComponentType>(withRouter,
     connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, {initializeApp}))(App)
+
+let MainApp  = () => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}
+
+export default MainApp

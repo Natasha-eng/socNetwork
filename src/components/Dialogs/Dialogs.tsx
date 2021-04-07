@@ -5,7 +5,6 @@ import Message from "./Message/Message";
 import {DialogsPageType} from "../../redux/state";
 import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
 
-
 export type PropsType = {
     updateNewMessageBody: (body: string) => void
     sendMessage: (newMessageBody: string) => void

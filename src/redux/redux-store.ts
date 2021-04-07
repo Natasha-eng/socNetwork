@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
 import dialogsReducer, {sendMessageAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import profileReducer, {addPostAC, deletePost, setStatus, setUserProfile} from "./profile-reducer";
@@ -13,7 +13,7 @@ import usersReducer, {
 } from "./users-reducer";
 import authReducer, {setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
-import {reducer as formReducer} from 'redux-form'
+import reducer, {reducer as formReducer} from 'redux-form'
 import appReducer, {initializedSuccess} from "./app-reducer";
 
 export type FollowSuccessType = ReturnType<typeof followSuccess>;
@@ -47,7 +47,12 @@ const reducers = combineReducers({
 
 export type RootStateRedux = ReturnType<typeof reducers>
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// @ts-ignore
+const store = createStore(reducers,  composeEnhancers(applyMiddleware(thunkMiddleware)));
+
+//let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 type Window = typeof window & { store: Store }
 (window as Window).store = store;
