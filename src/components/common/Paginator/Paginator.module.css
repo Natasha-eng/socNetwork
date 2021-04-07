@@ -1,3 +1,16 @@
 .selectedPage {
     font-weight: bold;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.pageNumber {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
 }

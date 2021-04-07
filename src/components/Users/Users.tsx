@@ -40,8 +40,8 @@ export function Users({totalUsersCount, pageSize, currentPage,
                 })}
             </div>*/}
 
-            <Paginator totalUsersCount={totalUsersCount} currentPage={currentPage} onPageChanged={onPageChanged}
-                       pageSize={pageSize}/>
+            <Paginator totalItemsCount={totalUsersCount} currentPage={currentPage} onPageChanged={onPageChanged}
+                       pageSize={pageSize} portionSize={10}/>
 
             <div className={usersStyles.container}>
                 {users.map(u => <User user = {u}  unfollow = {props.unfollow} follow={props.follow} followingInProgress={props.followingInProgress} key={u.id} />)}
