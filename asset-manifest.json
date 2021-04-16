@@ -1,21 +1,29 @@
 {
   "files": {
-    "main.css": "/socNetwork/static/css/main.81eef0d6.chunk.css",
-    "main.js": "/socNetwork/static/js/main.520d7773.chunk.js",
-    "main.js.map": "/socNetwork/static/js/main.520d7773.chunk.js.map",
-    "runtime-main.js": "/socNetwork/static/js/runtime-main.05c9dfd6.js",
-    "runtime-main.js.map": "/socNetwork/static/js/runtime-main.05c9dfd6.js.map",
-    "static/js/2.9d5d0632.chunk.js": "/socNetwork/static/js/2.9d5d0632.chunk.js",
-    "static/js/2.9d5d0632.chunk.js.map": "/socNetwork/static/js/2.9d5d0632.chunk.js.map",
+    "main.css": "/socNetwork/static/css/main.3eed0917.chunk.css",
+    "main.js": "/socNetwork/static/js/main.563147b9.chunk.js",
+    "main.js.map": "/socNetwork/static/js/main.563147b9.chunk.js.map",
+    "runtime-main.js": "/socNetwork/static/js/runtime-main.fa1634ae.js",
+    "runtime-main.js.map": "/socNetwork/static/js/runtime-main.fa1634ae.js.map",
+    "static/js/2.af206f6d.chunk.js": "/socNetwork/static/js/2.af206f6d.chunk.js",
+    "static/js/2.af206f6d.chunk.js.map": "/socNetwork/static/js/2.af206f6d.chunk.js.map",
+    "static/css/3.3821c1f9.chunk.css": "/socNetwork/static/css/3.3821c1f9.chunk.css",
+    "static/js/3.b78f8bbf.chunk.js": "/socNetwork/static/js/3.b78f8bbf.chunk.js",
+    "static/js/3.b78f8bbf.chunk.js.map": "/socNetwork/static/js/3.b78f8bbf.chunk.js.map",
+    "static/css/4.1f84f7fa.chunk.css": "/socNetwork/static/css/4.1f84f7fa.chunk.css",
+    "static/js/4.c60309ea.chunk.js": "/socNetwork/static/js/4.c60309ea.chunk.js",
+    "static/js/4.c60309ea.chunk.js.map": "/socNetwork/static/js/4.c60309ea.chunk.js.map",
     "index.html": "/socNetwork/index.html",
-    "static/css/main.81eef0d6.chunk.css.map": "/socNetwork/static/css/main.81eef0d6.chunk.css.map",
-    "static/js/2.9d5d0632.chunk.js.LICENSE.txt": "/socNetwork/static/js/2.9d5d0632.chunk.js.LICENSE.txt",
+    "static/css/3.3821c1f9.chunk.css.map": "/socNetwork/static/css/3.3821c1f9.chunk.css.map",
+    "static/css/4.1f84f7fa.chunk.css.map": "/socNetwork/static/css/4.1f84f7fa.chunk.css.map",
+    "static/css/main.3eed0917.chunk.css.map": "/socNetwork/static/css/main.3eed0917.chunk.css.map",
+    "static/js/2.af206f6d.chunk.js.LICENSE.txt": "/socNetwork/static/js/2.af206f6d.chunk.js.LICENSE.txt",
     "static/media/load.635828fc.gif": "/socNetwork/static/media/load.635828fc.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.05c9dfd6.js",
-    "static/js/2.9d5d0632.chunk.js",
-    "static/css/main.81eef0d6.chunk.css",
-    "static/js/main.520d7773.chunk.js"
+    "static/js/runtime-main.fa1634ae.js",
+    "static/js/2.af206f6d.chunk.js",
+    "static/css/main.3eed0917.chunk.css",
+    "static/js/main.563147b9.chunk.js"
   ]
 }
