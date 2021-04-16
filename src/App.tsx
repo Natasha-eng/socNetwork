@@ -5,8 +5,6 @@ import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from './components/News/News';
 import Music from "./components/Music/Music";
 import Settings from './components/Settings/Settings';
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from './components/Users/UsersContainer';
 import Login from "./components/Login/Login";
@@ -15,6 +13,15 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import store, {RootStateRedux} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
+import {withSuspense} from "./hoc/withSuspense";
+//import DialogsContainer from "./components/Dialogs/DialogsContainer";
+//import ProfileContainer from "./components/Profile/ProfileContainer";
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+
+
+const SuspenseDialogs = withSuspense(DialogsContainer)
+const SuspenseProfile= withSuspense(ProfileContainer)
 
 
 type MapDispatchPropsType = {
@@ -43,12 +50,10 @@ class App extends React.Component<PropsType> {
             <div>
                 <HeaderContainer/>
                 <div className='app-wrapper'>
-
-                   {/* <Navbar/>*/}
                     <div className="app-wrapper-content">
-                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                        <Route path='/dialogs' render={ ()=> <SuspenseDialogs/> }/>
 
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                        <Route path='/profile/:userId?' render={ ()=> <SuspenseProfile/> }/>
 
                         <Route path='/users' render={() => <UsersContainer/>}/>
 
@@ -72,10 +77,10 @@ const mapStateToProps = (state: RootStateRedux) => ({
     initialized: state.App.initialized
 })
 
-let AppContainer =  compose<React.ComponentType>(withRouter,
+let AppContainer = compose<React.ComponentType>(withRouter,
     connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateRedux>(mapStateToProps, {initializeApp}))(App)
 
-let MainApp  = () => {
+let MainApp = () => {
     return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
